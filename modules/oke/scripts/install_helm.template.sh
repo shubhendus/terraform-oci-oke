@@ -11,3 +11,5 @@ sudo mv linux-amd64/helm /usr/local/bin
 rm -rf linux-amd64
 
 helm init --upgrade
+
+rm -f helm-v${helm_version}-linux-amd64.tar.gz

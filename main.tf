@@ -143,5 +143,43 @@ module "oke" {
 
   # calico
   calico_version = "${var.calico_version}"
-  install_calico = "${var.install_calico}" 
+  install_calico = "${var.install_calico}"
+}
+
+module "osb" {
+  source = "./modules/osb"
+
+  # identity
+  api_fingerprint      = "${var.api_fingerprint}"
+  api_private_key_path = "${var.api_private_key_path}"
+  api_passphrase       = "${var.api_passphrase}"
+  tenancy_ocid         = "${var.tenancy_ocid}"
+  user_ocid            = "${var.user_ocid}"
+
+  # ssh keys
+  ssh_private_key_path = "${var.ssh_private_key_path}"
+
+  # oci
+  label_prefix = "${var.label_prefix}"
+  region       = "${var.region}"
+
+  # bastion
+  bastion_public_ip      = "${module.base.bastion_public_ip}"
+  create_bastion         = "${var.create_bastion}"
+  image_operating_system = "${var.image_operating_system}"
+
+  # oci service broker
+  create_oci_service_broker                  = "${var.create_oci_service_broker}"
+  service_catalog_version                    = "${var.service_catalog_version}"
+  helm_oci_service_broker_release_name                          = "${var.helm_oci_service_broker_release_name}"
+  oci_service_broker_version                 = "${var.oci_service_broker_version}"
+  oci_service_broker_secret_name             = "${var.oci_service_broker_secret_name}"
+  oci_service_broker_replicas                = "${var.oci_service_broker_replicas}"
+  oci_service_broker_service_name            = "${var.oci_service_broker_service_name}"
+  oci_service_broker_etcd_embedded           = "${var.oci_service_broker_etcd_embedded}"
+  oci_service_broker_servers                 = "${var.oci_service_broker_servers}"
+  oci_service_broker_storage_tls_enabled     = "${var.oci_service_broker_storage_tls_enabled}"
+  oci_service_broker_client_cert_secret_name = "${var.oci_service_broker_client_cert_secret_name}"
+  oci_service_broker_tls_enabled             = "${var.oci_service_broker_tls_enabled}"
+  oci_service_broker_tls_secret_name         = "${var.oci_service_broker_tls_secret_name}"
 }

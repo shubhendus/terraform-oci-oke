@@ -6,6 +6,11 @@ variable "api_fingerprint" {
   description = "fingerprint of oci api private key"
 }
 
+variable "api_passphrase" {
+  description = "the passphrase for the oci key"
+  default     = ""
+}
+
 variable "api_private_key_path" {
   description = "path to oci api private key"
 }
@@ -292,4 +297,72 @@ variable "calico_version" {
 variable "install_calico" {
   description = "whether to install calico for network pod security policy"
   default     = false
+}
+
+# oci service broker
+
+variable "create_oci_service_broker" {
+  description = "whether to install the oci service broker"
+  default     = false
+}
+
+variable "service_catalog_version" {
+  description = "the version of Kubernetes Service Catalog to install"
+  default     = "0.1.34"
+}
+
+## oci service broker helm chart parameters
+variable "helm_oci_service_broker_release_name" {
+  description = "the name of the helm release of oci service broker"
+  default     = "service-broker"
+}
+
+variable "oci_service_broker_version" {
+  description = "the version of the oci service broker chart"
+  default     = "1.0.1"
+}
+
+variable "oci_service_broker_secret_name" {
+  description = "the name of the ocicredential. Maps to ociCredentials.secretName"
+  default     = "ocicredentials"
+}
+
+variable "oci_service_broker_replicas" {
+  description = "Number of replicas of the broker. Maps to replicaCount"
+  default     = 1
+}
+
+variable "oci_service_broker_service_name" {
+  description = "Name of the service broker. Maps to service.name"
+  default     = "service-broker"
+}
+
+variable "oci_service_broker_etcd_embedded" {
+  description = "Whether to use the embedded etcd. Maps to storage.etcd.useEmbdded"
+  default     = false
+}
+
+variable "oci_service_broker_servers" {
+  description = "comma separated etcd server URLs. Maps to storage.etcd.servers"
+  default     = ""
+}
+
+variable "oci_service_broker_storage_tls_enabled" {
+  description = "Whether TLS is to be used to communicate with the etcd servers. Maps to storage.etcd.tls.enabled"
+  default     = "false"
+}
+
+variable "oci_service_broker_client_cert_secret_name" {
+  description = "The Kubernetes secret containing the necessary files to communicate with etcd using TLS. Maps to storage.etcd.tls.clientCertSecretName"
+  default     = ""
+}
+
+variable "oci_service_broker_tls_enabled" {
+  description = "Whether broker needs to be TLS enabled. Maps to tls.enabled"
+  default     = "false"
+}
+
+variable "oci_service_broker_tls_secret_name" {
+  description = "The secret which contains the PKCS#12 file and the export password. Maps to tls.secretName"
+  default     = ""
 }
